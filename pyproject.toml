@@ -6,11 +6,11 @@ authors = ["georgesmyr <70004539+georgesmyr@users.noreply.github.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = ">=3.9,<3.15"
 zipline-reloaded = "^3.0.3"
 alphalens-reloaded = "^0.4.3"
 pyfolio-reloaded = "^0.9.5"
-
+pyportfolioopt = "^1.5.5"
 
 [build-system]
 requires = ["poetry-core"]
