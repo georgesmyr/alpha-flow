@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "alpha-flow"
+name = "alphaflow"
 version = "0.1.0"
 description = ""
 authors = ["georgesmyr <70004539+georgesmyr@users.noreply.github.com>"]
@@ -11,6 +11,8 @@ zipline-reloaded = "^3.0.3"
 alphalens-reloaded = "^0.4.3"
 pyfolio-reloaded = "^0.9.5"
 pyportfolioopt = "^1.5.5"
+azure-storage-blob = "^12.19.0"
+azure-identity = "^1.15.0"
 
 [build-system]
 requires = ["poetry-core"]
