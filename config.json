@@ -1,0 +1,5 @@
+{
+    "azure": {
+        "storage": {"connection_string": "DefaultEndpointsProtocol=https;AccountName=alphaflow;AccountKey=r6Dy3G7Ix3dsD7LGn96IKo/00GjChZ5naGn6yfpfNuWaTmrJyIu5RqJglQ7vfbhaKEhS3RZfjC2F+AStAbFDaQ==;EndpointSuffix=core.windows.net"}
+    }
+}
