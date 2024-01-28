@@ -7,7 +7,6 @@ from azure.core.exceptions import ResourceNotFoundError
 
 from alphaflow.utils import load_config
 from alphaflow.utils import printc
-from alphaflow.remote.storage.utils import is_iterator_empty
 
 
 class AzureBlobStorage(object):
@@ -49,7 +48,7 @@ class AzureBlobStorage(object):
     def list_containers(self) -> None:
         """ List containers in the storage account. """
         container_list = self.blob_service_client.list_containers()
-        if not is_iterator_empty(container_list):
+        if container_list:
             printc("\nList of containers in the storage account:", "blue")
             for container in container_list:
                 printc(f" - {container.name}", "cyan")
@@ -164,12 +163,11 @@ class AzureBlobStorage(object):
             raise ResourceNotFoundError(f"Container '{container_id}' does not exist.")
         # List blobs in container
         blob_list = container_client.list_blobs()
-        if not is_iterator_empty(blob_list):
+        if blob_list:
             printc(f"\nBlobs in container {container_id}:", "blue")
             for blob in blob_list:
                 printc(f" - {blob.name}", "cyan")
         else:
             printc("\nContainer is empty.", "blue")
-
         return blob_list
     
