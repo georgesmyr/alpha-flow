@@ -8,6 +8,8 @@ from azure.core.exceptions import ResourceNotFoundError
 from alphaflow.utils import load_config
 from alphaflow.utils import printc
 
+IGNORE_FILES = [".DS_Store"]
+
 
 class AzureBlobStorage(object):
 
@@ -86,8 +88,9 @@ class AzureBlobStorage(object):
                     # Upload blob 
                     self._upload_file(full_file_path, container_name, store_path)
         else:
-            # If path points to file, upload file
-            self._upload_file(path, container_name, blob_path)
+            # If path points to file and is not in IGNORE_FILES, upload the file
+            store_path = os.path.join(blob_path, os.path.basename(path))
+            self._upload_file(path, container_name, store_path)
                 
 
     def _upload_file(self, path: str, container_name: str, blob_store_path: str, verbose: bool = True) -> None:
@@ -97,6 +100,10 @@ class AzureBlobStorage(object):
         :param container_name: The name of the container.
         :param blob_name: The name of the blob.
         """
+        # If file is in IGNORE_FILES, skip
+        if os.path.basename(path) in IGNORE_FILES:
+            printc(f"Skipped file {path} because it is in IGNORE_FILES.", "blue")
+            return 
         try:
             # Instantiate blob client
             blob_obj = self.blob_service_client.get_blob_client(container=container_name, blob=blob_store_path)
