@@ -71,22 +71,24 @@ class AzureBlobStorage(object):
             raise ResourceNotFoundError(f"Container '{container_name}' does not exist.")
         # If path is not absolute, make it absolute
         if not os.path.isabs(path):
-            abs_path = os.path.abspath(path)
+            path = os.path.abspath(path)
+
+        printc("Initiating upload...", "blue")
         # If path points to directory, upload directory
-        if os.path.isdir(abs_path):
-            for dirpath, _, filenames in os.walk(abs_path):
+        if os.path.isdir(path):
+            for dirpath, _, filenames in os.walk(path):
                 for file in filenames:
                     # Get the full file path
                     full_file_path = os.path.join(dirpath, file)
                     # Get the relative file path
-                    relative_path = os.path.relpath(full_file_path, abs_path)
+                    relative_path = os.path.relpath(full_file_path, path)
                     # Get the blob store path
                     store_path = os.path.join(blob_path, relative_path)
                     # Upload blob 
                     self._upload_file(full_file_path, container_name, store_path)
         else:
             # If path points to file, upload file
-            self._upload_file(abs_path, container_name, blob_path)
+            self._upload_file(path, container_name, blob_path)
                 
 
     def _upload_file(self, path: str, container_name: str, blob_store_path: str, verbose: bool = True) -> None:
