@@ -13,6 +13,7 @@ pyfolio-reloaded = "^0.9.5"
 pyportfolioopt = "^1.5.5"
 azure-storage-blob = "^12.19.0"
 azure-identity = "^1.15.0"
+pyarrow = "^15.0.0"
 
 [build-system]
 requires = ["poetry-core"]
